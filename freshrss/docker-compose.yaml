@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  freshrss:
+    image: freshrss/freshrss:1.19.2
+    restart: always
+    expose:
+      - "80"
+    volumes:
+      - data:/var/www/FreshRSS/data
+      - extensions:/var/www/FreshRSS/extensions
+    environment:
+      CRON_MIN: 1
+      TZ: "Asia/Shanghai"
+    labels:
+      - traefik.http.routers.freshrss.rule=Host(`${HOST}`)
+      - traefik.http.routers.freshrss.tls=true
+    networks:
+      - traefik
+
+volumes:
+  data:
+  extensions:
+
+networks:
+  traefik:
+    external: true

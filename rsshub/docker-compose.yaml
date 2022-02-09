@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  rsshub:
+    image: diygod/rsshub:2022-02-10
+    restart: always
+    expose:
+      - "1200"
+    environment:
+      NODE_ENV: production
+      CACHE_TYPE: redis
+      ACCESS_KEY: "${ACCESS_KEY}"
+      SENTRY: "${SENTRY}"
+      TITLE_LENGTH_LIMIT: 200
+      REQUEST_RETRY: 3
+      REQUEST_TIMEOUT: 120000
+      SENTRY_ROUTE_TIMEOUT: 6000
+      REDIS_URL: "redis://redis:6379/"
+      PUPPETEER_WS_ENDPOINT: "ws://browserless:3000"
+    depends_on:
+      - redis
+      - browserless
+    networks:
+      - traefik
+      - default
+    labels:
+      - traefik.http.routers.rsshub.rule=Host(`${HOST}`)
+      - traefik.http.routers.rsshub.tls=true
+
+  browserless:
+    # See issue 6680
+    image: browserless/chrome:1.43-chrome-stable
+    restart: always
+    ulimits:
+      core:
+        hard: 0
+        soft: 0
+    labels:
+      - "traefik.enable=false"
+
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - redis-data:/data
+    labels:
+      - "traefik.enable=false"
+
+volumes:
+  redis-data:
+
+networks:
+  traefik:
+    external: true
