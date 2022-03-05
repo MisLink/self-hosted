@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  code-server:
+    image: codercom/code-server:4.1.0
+    expose:
+      - "8080"
+    volumes:
+      - ${HOME}/.config:/home/coder/.config
+      - ${PROJECTS}:/home/coder/project
+    environment:
+      - DOCKER_USER=${USER}
+    labels:
+      - traefik.http.routers.code-server.rule=Host(`${HOST}`)
+      - traefik.http.routers.code-server.tls=true
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
