@@ -21,6 +21,7 @@ services:
     volumes:
       - image-data:/var/www/wallabag/web/assets/images
       - app-data:/var/www/wallabag/data
+      - site-config-data:/var/www/wallabag/vendor/j0k3r/graby-site-config
     depends_on:
       - redis
     labels:
@@ -41,6 +42,7 @@ volumes:
   redis-data:
   image-data:
   app-data:
+  site-config-data:
 
 networks:
   traefik:
