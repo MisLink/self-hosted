@@ -2,7 +2,7 @@ version: '3'
 
 services:
   freshrss:
-    image: freshrss/freshrss:1.19.2
+    image: freshrss/freshrss:1.20.0
     restart: always
     expose:
       - "80"
@@ -21,6 +21,7 @@ services:
 volumes:
   data:
   extensions:
+
 
 networks:
   traefik:

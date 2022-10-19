@@ -2,7 +2,7 @@ version: '3'
 
 services:
   rsshub:
-    image: diygod/rsshub:2022-02-24
+    image: diygod/rsshub:2022-10-15
     restart: always
     expose:
       - "1200"
@@ -48,6 +48,7 @@ services:
 
 volumes:
   redis-data:
+
 
 networks:
   traefik:

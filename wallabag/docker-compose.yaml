@@ -1,7 +1,7 @@
 version: '3'
 services:
   wallabag:
-    image: wallabag/wallabag:2.4.2
+    image: wallabag/wallabag:2.5.1
     restart: always
     environment:
       SYMFONY__ENV__SECRET: ${SECRET}
@@ -43,6 +43,7 @@ volumes:
   image-data:
   app-data:
   site-config-data:
+
 
 networks:
   traefik:
