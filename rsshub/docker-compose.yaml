@@ -2,10 +2,10 @@ version: '3'
 
 services:
   rsshub:
-    image: diygod/rsshub:2022-10-15
+    image: diygod/rsshub:2023-02-27
     restart: always
-    expose:
-      - "1200"
+    ports:
+      - "127.0.0.1:8002:1200"
     environment:
       NODE_ENV: production
       CACHE_TYPE: redis
@@ -20,12 +20,6 @@ services:
     depends_on:
       - redis
       - browserless
-    networks:
-      - traefik
-      - default
-    labels:
-      - traefik.http.routers.rsshub.rule=Host(`${HOST}`)
-      - traefik.http.routers.rsshub.tls=true
 
   browserless:
     # See issue 6680
@@ -35,16 +29,12 @@ services:
       core:
         hard: 0
         soft: 0
-    labels:
-      - "traefik.enable=false"
 
   redis:
     image: redis:alpine
     restart: always
     volumes:
       - redis-data:/data
-    labels:
-      - "traefik.enable=false"
 
 volumes:
   redis-data:

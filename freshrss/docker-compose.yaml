@@ -2,21 +2,16 @@ version: '3'
 
 services:
   freshrss:
-    image: freshrss/freshrss:1.20.0
+    image: freshrss/freshrss:1.20.2
     restart: always
-    expose:
-      - "80"
+    ports:
+      - "127.0.0.1:8001:80"
     volumes:
       - data:/var/www/FreshRSS/data
       - extensions:/var/www/FreshRSS/extensions
     environment:
       CRON_MIN: 1
       TZ: "Asia/Shanghai"
-    labels:
-      - traefik.http.routers.freshrss.rule=Host(`${HOST}`)
-      - traefik.http.routers.freshrss.tls=true
-    networks:
-      - traefik
 
 volumes:
   data:

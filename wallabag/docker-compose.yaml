@@ -1,7 +1,7 @@
 version: '3'
 services:
   wallabag:
-    image: wallabag/wallabag:2.5.1
+    image: wallabag/wallabag:2.5.4
     restart: always
     environment:
       SYMFONY__ENV__SECRET: ${SECRET}
@@ -16,27 +16,19 @@ services:
       SYMFONY__ENV__MAILER_PASSWORD: ${MAILER_PASSWORD}
       SYMFONY__ENV__TWOFACTOR_SENDER: ${TWOFACTOR_SENDER}
       SYMFONY__ENV__FOSUSER_REGISTRATION: "false"
-    expose:
-      - "80"
+    ports:
+      - "127.0.0.1:8003:80"
     volumes:
       - image-data:/var/www/wallabag/web/assets/images
       - app-data:/var/www/wallabag/data
       - site-config-data:/var/www/wallabag/vendor/j0k3r/graby-site-config
     depends_on:
       - redis
-    labels:
-      - traefik.http.routers.wallabag.rule=Host(`${HOST}`)
-      - traefik.http.routers.wallabag.tls=true
-    networks:
-      - traefik
-      - default
   redis:
     image: redis:alpine
     restart: always
     volumes:
       - redis-data:/data
-    labels:
-      - "traefik.enable=false"
 
 volumes:
   redis-data:
