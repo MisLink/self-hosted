@@ -16,8 +16,3 @@ services:
 volumes:
   data:
   extensions:
-
-
-networks:
-  traefik:
-    external: true

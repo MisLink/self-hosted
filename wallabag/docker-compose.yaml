@@ -35,8 +35,3 @@ volumes:
   image-data:
   app-data:
   site-config-data:
-
-
-networks:
-  traefik:
-    external: true
