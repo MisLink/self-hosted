@@ -17,6 +17,7 @@ services:
       SENTRY_ROUTE_TIMEOUT: 6000
       REDIS_URL: "redis://redis:6379/"
       PUPPETEER_WS_ENDPOINT: "ws://browserless:3000"
+      GITHUB_ACCESS_TOKEN: "${GITHUB_ACCESS_TOKEN}"
     depends_on:
       - redis
       - browserless
