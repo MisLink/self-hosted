@@ -19,7 +19,6 @@ services:
       GITHUB_ACCESS_TOKEN: "${GITHUB_ACCESS_TOKEN}"
     depends_on:
       - redis
-      - browserless
 
   redis:
     image: redis:alpine
