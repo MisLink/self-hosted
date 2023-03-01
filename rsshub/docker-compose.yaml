@@ -2,33 +2,24 @@ version: '3'
 
 services:
   rsshub:
-    image: diygod/rsshub:2023-02-27
+    image: diygod/rsshub:chromium-bundled-2023-02-27
     restart: always
     ports:
       - "127.0.0.1:8002:1200"
     environment:
       NODE_ENV: production
       CACHE_TYPE: redis
+      REDIS_URL: "redis://redis:6379/"
       ACCESS_KEY: "${ACCESS_KEY}"
       SENTRY: "${SENTRY}"
       TITLE_LENGTH_LIMIT: 200
       REQUEST_RETRY: 3
       REQUEST_TIMEOUT: 120000
       SENTRY_ROUTE_TIMEOUT: 6000
-      REDIS_URL: "redis://redis:6379/"
-      PUPPETEER_WS_ENDPOINT: "ws://browserless:3000"
       GITHUB_ACCESS_TOKEN: "${GITHUB_ACCESS_TOKEN}"
     depends_on:
       - redis
       - browserless
-
-  browserless:
-    image: browserless/chrome
-    restart: always
-    ulimits:
-      core:
-        hard: 0
-        soft: 0
 
   redis:
     image: redis:alpine
