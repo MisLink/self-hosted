@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  rsshub:
+    image: bayedev/opencatd:latest
+    restart: always
+    ports:
+      - "127.0.0.1:8005:80"
+    volumes:
+      - data:/opt/db
+
+volumes:
+  data:
