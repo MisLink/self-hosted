@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  rsshub:
+  opencat:
     image: bayedev/opencatd:latest
     restart: always
     ports:
