@@ -8,6 +8,6 @@ services:
         VERSION: v4.0.1
     restart: always
     ports:
-      - "127.0.0.1:8006:80"
+      - "8006:80"
     volumes:
       - ./snell-server.conf:/etc/snell/snell-server.conf
