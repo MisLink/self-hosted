@@ -1,13 +1,12 @@
 version: '3'
 
 services:
-  snell-serveer:
+  snell-server:
     build:
       context: .
       args:
         VERSION: v4.0.1
     restart: always
-    ports:
-      - "8006:80"
+    network_mode: host
     volumes:
       - ./snell-server.conf:/etc/snell/snell-server.conf
