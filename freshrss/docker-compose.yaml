@@ -12,6 +12,15 @@ services:
     environment:
       CRON_MIN: 1
       TZ: "Asia/Shanghai"
+    labels:
+      - docker-volume-backup.stop-during-backup=true
+
+  backup:
+    environment:
+      AWS_S3_PATH: freshrss/
+    volumes:
+      - data:/backup/data:ro
+      - extensions:/backup/extensions:ro
 
 volumes:
   data:

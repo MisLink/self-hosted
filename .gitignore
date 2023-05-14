@@ -1,5 +1,4 @@
 *.crt
 *.key
 .env
-traefik.yaml
 backups/

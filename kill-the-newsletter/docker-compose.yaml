@@ -17,6 +17,14 @@ services:
       WEB_URL: ${WEB_URL}
       EMAIL_URL: ${EMAIL_URL}
       ADMIN_EMAIL: ${ADMIN_EMAIL}
+    labels:
+      - docker-volume-backup.stop-during-backup=true
+
+  backup:
+    environment:
+      AWS_S3_PATH: kill-the-newsletter/
+    volumes:
+      - data:/backup/data:ro
 
 volumes:
   data:

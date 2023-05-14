@@ -19,12 +19,22 @@ services:
       GITHUB_ACCESS_TOKEN: "${GITHUB_ACCESS_TOKEN}"
     depends_on:
       - redis
+    labels:
+      - docker-volume-backup.stop-during-backup=true
 
   redis:
     image: redis:alpine
     restart: always
     volumes:
       - redis-data:/data
+    labels:
+      - docker-volume-backup.stop-during-backup=true
+
+  backup:
+    environment:
+      AWS_S3_PATH: rsshub/
+    volumes:
+      - redis-data:/backup/redis-data:ro
 
 volumes:
   redis-data:
