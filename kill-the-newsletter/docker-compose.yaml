@@ -18,13 +18,14 @@ services:
       EMAIL_URL: ${EMAIL_URL}
       ADMIN_EMAIL: ${ADMIN_EMAIL}
     labels:
-      - docker-volume-backup.stop-during-backup=true
+      - docker-volume-backup.stop-during-backup=kill-the-newsletter
 
   backup:
     extends:
       file: ../docker-compose.backup.yaml
       service: backup
     environment:
+      BACKUP_STOP_CONTAINER_LABEL: kill-the-newsletter
       AWS_S3_PATH: kill-the-newsletter/
     volumes:
       - data:/backup/data:ro

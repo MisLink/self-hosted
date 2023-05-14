@@ -20,7 +20,7 @@ services:
     depends_on:
       - redis
     labels:
-      - docker-volume-backup.stop-during-backup=true
+      - docker-volume-backup.stop-during-backup=rsshub
 
   redis:
     image: redis:alpine
@@ -28,13 +28,14 @@ services:
     volumes:
       - redis-data:/data
     labels:
-      - docker-volume-backup.stop-during-backup=true
+      - docker-volume-backup.stop-during-backup=rsshub
 
   backup:
     extends:
       file: ../docker-compose.backup.yaml
       service: backup
     environment:
+      BACKUP_STOP_CONTAINER_LABEL: rsshub
       AWS_S3_PATH: rsshub/
     volumes:
       - redis-data:/backup/redis-data:ro

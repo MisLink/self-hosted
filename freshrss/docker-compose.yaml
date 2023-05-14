@@ -13,13 +13,14 @@ services:
       CRON_MIN: 1
       TZ: "Asia/Shanghai"
     labels:
-      - docker-volume-backup.stop-during-backup=true
+      - docker-volume-backup.stop-during-backup=freshrss
 
   backup:
     extends:
       file: ../docker-compose.backup.yaml
       service: backup
     environment:
+      BACKUP_STOP_CONTAINER_LABEL: freshrss
       AWS_S3_PATH: freshrss/
     volumes:
       - data:/backup/data:ro
