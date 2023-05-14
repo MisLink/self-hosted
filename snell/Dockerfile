@@ -4,7 +4,9 @@ ARG VERSION=v4.0.1
 
 RUN apt-get update \
   && apt-get install -y wget unzip \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
+  && curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-$(uname -s)-$(uname -m) -o /usr/local/bin/envsubst \
+  && chmod +x /usr/local/bin/envsubst
 
 RUN wget https://dl.nssurge.com/snell/snell-server-${VERSION}-linux-amd64.zip -O snell.zip \
   && unzip snell.zip \
@@ -13,4 +15,6 @@ RUN wget https://dl.nssurge.com/snell/snell-server-${VERSION}-linux-amd64.zip -O
   && chmod +x /usr/bin/snell-server \
   && mkdir -p /etc/snell
 
-CMD ["snell-server", "-c", "/etc/snell/snell-server.conf"]
+COPY snell-server.conf /etc/snell/snell-server.conf
+
+CMD envsubst -no-unset -no-empty -i /etc/snell/snell-server.conf -o /etc/snell/snell-server.conf && snell-server -c /etc/snell/snell-server.conf
