@@ -21,6 +21,9 @@ services:
       - docker-volume-backup.stop-during-backup=true
 
   backup:
+    extends:
+      file: ../docker-compose.backup.yaml
+      service: backup
     environment:
       AWS_S3_PATH: kill-the-newsletter/
     volumes:
