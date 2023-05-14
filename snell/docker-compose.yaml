@@ -8,5 +8,7 @@ services:
         VERSION: v4.0.1
     restart: always
     network_mode: host
-    volumes:
-      - ./snell-server.conf:/etc/snell/snell-server.conf
+    environment:
+      LISTEN: ${LISTEN}
+      PSK: ${PSK}
+      IPV6: ${IPV6}
