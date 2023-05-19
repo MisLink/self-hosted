@@ -2,7 +2,7 @@ version: '3'
 
 services:
   rsshub:
-    image: diygod/rsshub:chromium-bundled-2023-04-03
+    image: diygod/rsshub:chromium-bundled-2023-05-19
     restart: always
     ports:
       - "127.0.0.1:8002:1200"
