@@ -14,6 +14,18 @@ services:
       TZ: "Asia/Shanghai"
     labels:
       - docker-volume-backup.stop-during-backup=freshrss
+  postgres:
+    image: postgres:15.3
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: freshrss
+      POSTGRES_DB: freshrss
+    volumes:
+      - pgdb:/var/lib/postgresql/data
+      - dbdump:/tmp/dbdump
+    labels:
+      - docker-volume-backup.archive-pre=pg_dump -U freshrss -f /tmp/dbdump/freshrss.sql
 
   backup:
     extends:
@@ -25,7 +37,10 @@ services:
     volumes:
       - data:/backup/data:ro
       - extensions:/backup/extensions:ro
+      - dbdump:/backup/dbdump:ro
 
 volumes:
   data:
   extensions:
+  pgdb:
+  dbdump:
