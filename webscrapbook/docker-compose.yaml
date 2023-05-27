@@ -2,7 +2,7 @@ version: '3'
 
 services:
   webscrapbook:
-    image: ghcr.io/mislink/webscrapbook:1.9.0
+    image: ghcr.io/mislink/webscrapbook:1.14.1
     restart: always
     ports:
       - "127.0.0.1:8004:8080"
