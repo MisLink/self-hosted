@@ -2,7 +2,7 @@ version: '3'
 
 services:
   rsshub:
-    image: diygod/rsshub:chromium-bundled-2023-05-26
+    image: diygod/rsshub:2023-05-26
     restart: always
     ports:
       - "127.0.0.1:8002:1200"
@@ -23,7 +23,7 @@ services:
       - docker-volume-backup.stop-during-backup=rsshub
 
   redis:
-    image: redis:alpine
+    image: redis:7-alpine
     restart: always
     volumes:
       - redis-data:/data
