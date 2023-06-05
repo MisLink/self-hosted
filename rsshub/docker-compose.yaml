@@ -1,8 +1,8 @@
-version: '3'
+version: '2'
 
 services:
   rsshub:
-    image: diygod/rsshub:chromium-bundled-2023-04-17
+    image: diygod/rsshub:chromium-bundled-2023-06-04
     restart: always
     ports:
       - "127.0.0.1:8002:1200"
@@ -17,6 +17,7 @@ services:
       REQUEST_TIMEOUT: 30000
       SENTRY_ROUTE_TIMEOUT: 10000
       GITHUB_ACCESS_TOKEN: "${GITHUB_ACCESS_TOKEN}"
+    cpus: 0.7
     depends_on:
       - redis
     labels:
