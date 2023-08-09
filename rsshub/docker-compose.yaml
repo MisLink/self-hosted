@@ -18,7 +18,7 @@ services:
       SENTRY_ROUTE_TIMEOUT: 10000
       GITHUB_ACCESS_TOKEN: "${GITHUB_ACCESS_TOKEN}"
     cpus: 0.5
-    mem_limit: 256m
+    mem_limit: 200m
     depends_on:
       - redis
     labels:
