@@ -1,0 +1,45 @@
+version: '3'
+services:
+  atuin:
+    restart: always
+    image: ghcr.io/atuinsh/atuin:18.0.1
+    command: server start
+    volumes:
+      - config:/config
+    ports:
+      - 127.0.0.1:8007:8888
+    environment:
+      ATUIN_HOST: "0.0.0.0"
+      ATUIN_OPEN_REGISTRATION: "false"
+      ATUIN_DB_URI: postgres://atuin:$ATUIN_DB_PASSWORD@postgresql/atuin
+      RUST_LOG: info
+    labels:
+      - docker-volume-backup.stop-during-backup=atuin
+  postgresql:
+    image: postgres:15.6
+    restart: always
+    volumes:
+      - pgdb:/var/lib/postgresql/data/
+      - dbdump:/tmp/dbdump
+    environment:
+      POSTGRES_USER: atuin
+      POSTGRES_DB: atuin
+      POSTGRES_PASSWORD: ${ATUIN_DB_PASSWORD}
+    labels:
+      - docker-volume-backup.archive-pre=pg_dump -U atuin -f /tmp/dbdump/atuin.sql
+      - docker-volume-backup.exec-label=atuin
+  backup:
+    extends:
+      file: ../docker-compose.backup.yaml
+      service: backup
+    environment:
+      EXEC_LABEL: atuin
+      BACKUP_STOP_CONTAINER_LABEL: atuin
+      AWS_S3_PATH: atuin/
+    volumes:
+      - dbdump:/backup/dbdump:ro
+
+volumes:
+  config:
+  pgdb:
+  dbdump:

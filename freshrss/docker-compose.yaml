@@ -26,12 +26,13 @@ services:
       - dbdump:/tmp/dbdump
     labels:
       - docker-volume-backup.archive-pre=pg_dump -U freshrss -f /tmp/dbdump/freshrss.sql
-
+      - docker-volume-backup.exec-label=atuin
   backup:
     extends:
       file: ../docker-compose.backup.yaml
       service: backup
     environment:
+      EXEC_LABEL: freshrss
       BACKUP_STOP_CONTAINER_LABEL: freshrss
       AWS_S3_PATH: freshrss/
     volumes:
