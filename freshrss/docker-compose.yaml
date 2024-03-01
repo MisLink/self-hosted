@@ -26,7 +26,7 @@ services:
       - dbdump:/tmp/dbdump
     labels:
       - docker-volume-backup.archive-pre=pg_dump -U freshrss -f /tmp/dbdump/freshrss.sql
-      - docker-volume-backup.exec-label=atuin
+      - docker-volume-backup.exec-label=freshrss
   backup:
     extends:
       file: ../docker-compose.backup.yaml
