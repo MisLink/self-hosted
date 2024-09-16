@@ -2,11 +2,17 @@ version: '3'
 
 services:
   webscrapbook:
-    image: ghcr.io/mislink/webscrapbook:2.3.3
+    image: ghcr.io/mislink/webscrapbook:2.4.0
+    command:
+      - --bind
+      - 0.0.0.0:8080
+      - --workers
+      - "4"
+      - --access-logfile
+      - "-"
     restart: always
     ports:
       - "127.0.0.1:8004:8080"
     volumes:
       - ${DATA}:/app/main
-    environment:
-      AUTH_PW: ${AUTH_PW}
+      - ./config.ini:/app/.wsb/config.ini

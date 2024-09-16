@@ -2,7 +2,7 @@ version: '3'
 
 services:
   freshrss:
-    image: freshrss/freshrss:1.24.1
+    image: freshrss/freshrss:1.24.3
     restart: always
     ports:
       - "127.0.0.1:8001:80"
