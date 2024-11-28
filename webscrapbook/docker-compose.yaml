@@ -2,7 +2,7 @@ version: '3'
 
 services:
   webscrapbook:
-    image: ghcr.io/mislink/webscrapbook:2.4.0
+    image: ghcr.io/mislink/webscrapbook:2.5.0
     command:
       - --bind
       - 0.0.0.0:8080
