@@ -1,0 +1,7 @@
+
+services:
+  vcards:
+    image: ghcr.io/metowolf/vcards:latest
+    restart: always
+    ports:
+      - "127.0.0.1:8008:5232"

@@ -1,8 +1,7 @@
-version: '3'
 services:
   atuin:
     restart: always
-    image: ghcr.io/atuinsh/atuin:18.3.0
+    image: ghcr.io/atuinsh/atuin:18.5.0
     command: server start
     volumes:
       - config:/config
