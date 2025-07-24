@@ -1,20 +1,21 @@
-FROM debian:12-slim
+FROM ubuntu:24.04
 
-RUN apt-get update \
-  && apt-get install -y wget unzip \
-  && rm -rf /var/lib/apt/lists/* \
-  && wget https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-$(uname -s)-$(uname -m) -O /usr/local/bin/envsubst \
+RUN apt-get update && apt-get install -y wget unzip ca-certificates \
+  && wget https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-Linux-x86_64 -O /usr/local/bin/envsubst \
   && chmod +x /usr/local/bin/envsubst
+
+WORKDIR /app
 
 ARG VERSION=v4.0.1
 
 RUN wget https://dl.nssurge.com/snell/snell-server-${VERSION}-linux-amd64.zip -O snell.zip \
   && unzip snell.zip \
   && rm snell.zip \
-  && mv snell-server /usr/bin/snell-server \
-  && chmod +x /usr/bin/snell-server \
-  && mkdir -p /etc/snell
+  && mv snell-server /usr/local/bin/snell-server
 
-COPY snell-server.conf /etc/snell/snell-server.conf
+COPY snell-server.conf snell-server.conf
+COPY entrypoint.sh /entrypoint.sh
 
-CMD envsubst -no-unset -no-empty -i /etc/snell/snell-server.conf -o /etc/snell/snell-server.conf && snell-server -c /etc/snell/snell-server.conf
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT [ "/entrypoint.sh" ]
