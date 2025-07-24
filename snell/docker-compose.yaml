@@ -10,3 +10,14 @@ services:
       LISTEN: ${LISTEN}
       PSK: ${PSK}
       IPV6: ${IPV6}
+  shadow-tls:
+    image: ghcr.io/ihciah/shadow-tls:latest
+    restart: always
+    network_mode: host
+    environment:
+      - MODE=server
+      - LISTEN=${SERVER}
+      - SERVER=${LISTEN}
+      - TLS=${TLS}
+      - PASSWORD=${PASSWORD}
+      - V3=true
