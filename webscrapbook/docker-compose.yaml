@@ -1,6 +1,6 @@
 services:
   webscrapbook:
-    image: ghcr.io/mislink/webscrapbook:2.5.2
+    image: ghcr.io/mislink/webscrapbook:2.6.1
     command:
       - --bind
       - 0.0.0.0:8080

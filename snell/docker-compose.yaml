@@ -5,7 +5,7 @@ services:
     build:
       context: .
       args:
-        VERSION: v4.0.1
+        VERSION: v5.0.0
     restart: always
     network_mode: host
     environment:
