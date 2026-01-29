@@ -1,7 +1,7 @@
 
 services:
   vcards:
-    image: ghcr.io/metowolf/vcards:2025.12.22-023023
+    image: ghcr.io/metowolf/vcards:2025.12.25-082533
     restart: always
     ports:
       - "127.0.0.1:8008:5232"
