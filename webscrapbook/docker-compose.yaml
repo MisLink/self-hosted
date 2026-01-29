@@ -1,9 +1,14 @@
 services:
   webscrapbook:
-    image: ghcr.io/mislink/webscrapbook:2.6.1
+    build:
+      context: .
+      args:
+        VERSION: "2.8.0"
     command:
       - --bind
       - 0.0.0.0:8080
+      - --worker-class
+      - gevent
       - --workers
       - "4"
       - --access-logfile
