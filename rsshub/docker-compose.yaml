@@ -35,6 +35,7 @@ services:
       - redis-data:/data
     labels:
       - docker-volume-backup.stop-during-backup=rsshub
+      - docker-volume-backup.exec-label=rsshub
     healthcheck:
       test: [ "CMD", "redis-cli", "-e", "ping" ]
       interval: 30s
@@ -47,6 +48,7 @@ services:
       file: ../docker-compose.backup.yaml
       service: backup
     environment:
+      EXEC_LABEL: rsshub
       BACKUP_STOP_DURING_BACKUP_LABEL: rsshub
       AWS_S3_PATH: rsshub/
     volumes:
