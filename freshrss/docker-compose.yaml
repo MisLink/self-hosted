@@ -12,6 +12,15 @@ services:
       TZ: "Asia/Shanghai"
     labels:
       - docker-volume-backup.stop-during-backup=freshrss
+    healthcheck:
+      test: [ "CMD-SHELL", "bash -c 'cat < /dev/null > /dev/tcp/127.0.0.1/80' 2>/dev/null" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    depends_on:
+      postgres:
+        condition: service_healthy
   postgres:
     image: postgres:15.3
     restart: always
@@ -25,6 +34,12 @@ services:
     labels:
       - docker-volume-backup.archive-pre=pg_dump -U freshrss -f /tmp/dbdump/freshrss.sql
       - docker-volume-backup.exec-label=freshrss
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-U", "freshrss", "-d", "freshrss" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
   backup:
     extends:
       file: ../docker-compose.backup.yaml

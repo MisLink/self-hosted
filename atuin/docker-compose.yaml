@@ -14,6 +14,15 @@ services:
       RUST_LOG: info
     labels:
       - docker-volume-backup.stop-during-backup=atuin
+    healthcheck:
+      test: [ "CMD-SHELL", "bash -c 'cat < /dev/null > /dev/tcp/127.0.0.1/8888' 2>/dev/null" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      postgresql:
+        condition: service_healthy
   postgresql:
     image: postgres:15.6
     restart: always
@@ -27,6 +36,12 @@ services:
     labels:
       - docker-volume-backup.archive-pre=pg_dump -U atuin -f /tmp/dbdump/atuin.sql
       - docker-volume-backup.exec-label=atuin
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-U", "atuin", "-d", "atuin" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
   backup:
     extends:
       file: ../docker-compose.backup.yaml

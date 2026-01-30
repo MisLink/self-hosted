@@ -17,9 +17,16 @@ services:
     env_file:
       - .auth.env
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     labels:
       - docker-volume-backup.stop-during-backup=rsshub
+    healthcheck:
+      test: [ "CMD", "curl", "-sfI", "-o", "/dev/null", "http://127.0.0.1:1200/" ]
+      interval: 30s
+      timeout: 15s
+      retries: 3
+      start_period: 60s
 
   redis:
     image: redis:7
@@ -28,6 +35,12 @@ services:
       - redis-data:/data
     labels:
       - docker-volume-backup.stop-during-backup=rsshub
+    healthcheck:
+      test: [ "CMD", "redis-cli", "-e", "ping" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
   backup:
     extends:
