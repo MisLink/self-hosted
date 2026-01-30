@@ -47,7 +47,7 @@ services:
       file: ../docker-compose.backup.yaml
       service: backup
     environment:
-      BACKUP_STOP_CONTAINER_LABEL: rsshub
+      BACKUP_STOP_DURING_BACKUP_LABEL: rsshub
       AWS_S3_PATH: rsshub/
     volumes:
       - redis-data:/backup/redis-data:ro

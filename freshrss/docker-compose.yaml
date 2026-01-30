@@ -46,7 +46,7 @@ services:
       service: backup
     environment:
       EXEC_LABEL: freshrss
-      BACKUP_STOP_CONTAINER_LABEL: freshrss
+      BACKUP_STOP_DURING_BACKUP_LABEL: freshrss
       AWS_S3_PATH: freshrss/
     volumes:
       - data:/backup/data:ro

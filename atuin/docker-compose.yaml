@@ -48,7 +48,7 @@ services:
       service: backup
     environment:
       EXEC_LABEL: atuin
-      BACKUP_STOP_CONTAINER_LABEL: atuin
+      BACKUP_STOP_DURING_BACKUP_LABEL: atuin
       AWS_S3_PATH: atuin/
     volumes:
       - dbdump:/backup/dbdump:ro
