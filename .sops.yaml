@@ -1,0 +1,15 @@
+keys:
+  - &primary age15257zjqhwk2ss440lg58p6s4rclqd4f5fvsxge2g09vg9hmah44qkjwv8y
+creation_rules:
+  - path_regex: xray/[^/]+\.yaml$
+    key_groups:
+      - age:
+          - *primary
+  - path_regex: \.env$
+    key_groups:
+      - age:
+          - *primary
+  - path_regex: \.ini$
+    key_groups:
+      - age:
+          - *primary

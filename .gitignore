@@ -1,6 +1,7 @@
 *.crt
 *.key
 .env
+.auth.env
 backups/
 config.ini
 client.yaml
