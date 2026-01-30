@@ -3,3 +3,5 @@
 .env
 backups/
 config.ini
+client.yaml
+server.yaml

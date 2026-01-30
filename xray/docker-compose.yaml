@@ -1,0 +1,9 @@
+services:
+  xray-server:
+    image: ghcr.io/xtls/xray-core:26.1.23
+    command: [ "run", "-c", "/etc/xray/config.yaml" ]
+    restart: always
+    ports:
+      - 10323:10323
+    volumes:
+      - ./server.yaml:/etc/xray/config.yaml:ro
