@@ -33,14 +33,15 @@ outbounds:
       tag: ENC[AES256_GCM,data:nMTtq631nfPpTf23ztM=,iv:nQ8i/7DpWOg6MNNTge4RFvGpu2SYHGZZxFySF7PqEfg=,tag:tE6KzuXXl5vU09bBVckkow==,type:str]
 sops:
     age:
-        - recipient: age15257zjqhwk2ss440lg58p6s4rclqd4f5fvsxge2g09vg9hmah44qkjwv8y
+        - recipient: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKnH3JJcsZnksInIdffC18IkcI2IGxnvyQBv3j+/MHsm
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBVelFhSlg2aEtmS3JQejF1
-            SkJJQnFWZkMvbkJmTWFSYlI3WlVKaUtWaUJrCmwvMUdEV2twRndmenBjZi9oRkUw
-            LzBNbVU5dlFzVWJuNVowM2tCVENaOGcKLS0tIEVZZ21lRHYvdFZWVWRVNW93TWR3
-            cXFNT0NnOEJ3dkNNQXRpSFNHODNhME0KOuqnZJBvbFEUpVgPhZbXVVO8TBQrF9rt
-            2HAv9RGXc0u3bsxeAIybVepTGf2hpgEKwHuscmy3HyJqSCV00tKR3g==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHNzaC1lZDI1NTE5IFFCNGJlZyBUUGtn
+            UFVWUGswaUhoVlMreExSOFNpQkNXS3JFY1pMeDNNMGU0cXplYURjCkhoZUlhaCt1
+            TjBLTHozK3ZMc1A4cVk4UU8wdGtjNGFROG4zRFlQY3RYdXMKLS0tIHgyQVFSL1BM
+            TTlDT2hpbE5LblJ5YWNnNUVXbkhkWGp2YThyV2kxUDdlTU0K5KRGl0pbaiisJwH2
+            JpcAmBbsxuOU/3XgwHhySezWln8pc9V43ZcgcPU8FlYRyU/jNx4L3k4oqz7leDRS
+            kOc75A==
             -----END AGE ENCRYPTED FILE-----
     lastmodified: "2026-01-30T16:55:51Z"
     mac: ENC[AES256_GCM,data:1fn9HYp5uL1MRZBOUeF6yB6yFnXB8zQ0VIJU1N/lATQXXOdAEtiefMo8pGlUOlhOJGKyRyjO06FGQKI7zzjhvpFZEmUuCXF0TUDF8DeVB2L44OrDiVnu/zrzTYGuQgLa4xn/6C9+OZDIdYgLvTsxVbELzlfkavrqNVh3h237xHQ=,iv:CyeCdG0qLoU+ZABEAusojJZOfQ4fOdBtt4h6H8VnBG0=,tag:/D8Q87CXOHrsP7wyO/auGQ==,type:str]

@@ -1,0 +1,11 @@
+services:
+  kosync:
+    image: koreader/kosync:latest
+    container_name: kosync
+    ports:
+      - 7200:7200
+    volumes:
+      - redis:/var/lib/redis
+
+volumes:
+  redis:
