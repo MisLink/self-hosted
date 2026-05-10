@@ -52,6 +52,7 @@ services:
       AWS_S3_PATH: atuin/
     volumes:
       - dbdump:/backup/dbdump:ro
+      - config:/backup/config:ro
 
 volumes:
   config:

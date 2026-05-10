@@ -9,6 +9,8 @@ services:
       - beszel_socket:/beszel_socket
     environment:
       APP_URL: ${APP_URL}
+    labels:
+      - docker-volume-backup.stop-during-backup=beszel
     healthcheck:
       test: [ "CMD", "/beszel", "health", "--url", "http://127.0.0.1:8090" ]
       interval: 30s
@@ -25,6 +27,8 @@ services:
       - beszel_socket:/beszel_socket
       # monitor other disks / partitions by mounting a folder in /extra-filesystems
       # - /mnt/disk/.beszel:/extra-filesystems/sda1:ro
+    labels:
+      - docker-volume-backup.stop-during-backup=beszel
     environment:
       LISTEN: /beszel_socket/beszel.sock
       KEY: ${KEY}
@@ -36,6 +40,17 @@ services:
       timeout: 10s
       retries: 3
       start_period: 20s
+  backup:
+    extends:
+      file: ../docker-compose.backup.yaml
+      service: backup
+    environment:
+      EXEC_LABEL: beszel
+      BACKUP_STOP_DURING_BACKUP_LABEL: beszel
+      AWS_S3_PATH: beszel/
+    volumes:
+      - beszel_data:/backup/beszel_data:ro
+      - beszel_agent_data:/backup/beszel_agent_data:ro
 volumes:
   beszel_data:
   beszel_socket:
