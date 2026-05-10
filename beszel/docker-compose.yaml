@@ -18,7 +18,7 @@ services:
       retries: 3
       start_period: 20s
   beszel-agent:
-    image: henrygd/beszel-agent:0.18
+    image: henrygd/beszel-agent:0.18.7
     restart: unless-stopped
     network_mode: host
     volumes:
