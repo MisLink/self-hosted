@@ -1,6 +1,6 @@
 services:
   beszel:
-    image: henrygd/beszel:0.18
+    image: henrygd/beszel:0.18.7
     restart: unless-stopped
     ports:
       - 127.0.0.1:8090:8090
